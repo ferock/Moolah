@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block bodyContent %}
+	<div class="content">
+                <h2 class="titulo">Account</h2>
+                <div class="account">
+                    <div class="columna50">
+                        <div class="profile">
+                            <div class="pic">
+                                <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c0.0.180.180/s160x160/1238194_10202153549419802_1176668774_a.jpg" id="picProfile" />
+                            </div>
+                            <div class="info">
+                                <ul>
+                                    <li>{{ userInfo}}</li>
+                                    <li>{{ extInfo.Telefono}}</li>
+                                    <li>{{ userInfo.email }}</li>
+                                    <li>Remitente</li>
+                                    <div class="cls"></div>
+                                </ul>
+                                <a href="/perfil" class="edit">Edit Profile</a>
+                            </div>
+                            <div class="cls"></div>
+                        </div>
+                        <div class="cls"></div>
+                    </div>
+                    <div class="columna50">
+                        <div class="config_user">
+                            <form class="frmConfig">
+                                <label class="titulo">Receive token when changed:</label><br/>
+                                <label><input type="checkbox" name="noti_sms" id="noti_sms"
+                                {% if extUser.Notificaciones == "sms" %}
+                                        checked
+                                    {% endif %}
+                                 />SMS
+                                        <span class="alert"> (*This service has an additional cost, <a href="#">Read More...</a>)</span></label><br/>
+                                <label><input type="checkbox" name="noti_email" id="noti_email" 
+                                    {% if extUser.Notificaciones == "email" %}
+                                        checked
+                                    {% endif %}
+                                     />Email</label><br/>
+                                <input type="submit" value="Save Changes" />
+                            </form>
+                            <div class="cls"></div>
+                            <hr/>
+                            <input type="text" value="ADFGS234SD" class="token" id="token" name="token" />
+                            <div class="cls"></div>
+                            <input type="submit" value="Generate new token" />
+                        </div>
+                        <div class="cls"></div>
+                    </div>
+                    <div class="cls"></div>
+                    <div class="columna50">
+                        <div class="list">
+                            <div class="table"><h3>List of Beneficiaries</h3>
+                                    <ul class="thead">
+                                        <li class="name">Name</li>
+                                        <li class="phone">Phone</li>
+                                        <li class="coins">MOO-Coins</li>
+                                    </ul>
+                                {% for benef in beneficiarios %}
+                                    <ul>
+                                        <li class="name">{{ benef.Usuario.username }}</li>
+                                        <li class="phone">{{ benef.Telefono }}</li>
+                                        <li class="coins">{{ benef.bits}}</li>
+                                    </ul>
+                                {% endfor %}
+                                <div class="cls"></div>
+                            </div>
+                            <div class="cls"></div>
+                            <a href="#" class="edit">Edit Beneficiaries</a>
+                        </div>
+                    </div>
+                    <div class="columna50">
+                        <div class="list transactions">
+                            <div class="table"><h3>Transactions</h3>
+                                <ul class="thead">
+                                    <li class="type">Type</li>
+                                    <li class="date">Date</li>
+                                    <li class="commerce">Commerce</li>
+                                    <li class="amount">Amount</li>
+                                    <li class="moocoins">Moo-Coins</li>
+                                    <li class="user">User</li>
+                                    <li class="view">View</li>
+                                </ul>
+                                <ul>
+                                    <li class="type">IN</li>
+                                    <li class="date">15/25/2013</li>
+                                    <li class="commerce">Kielsa</li>
+                                    <li class="amount">200$</li>
+                                    <li class="moocoins">10</li>
+                                    <li class="user">Luis Aguilar</li>
+                                    <li class="view">View</li>
+                                </ul>
+                                <ul>
+                                    <li class="type">Out</li>
+                                    <li class="date">15/25/2013</li>
+                                    <li class="commerce">Kielsa</li>
+                                    <li class="amount">200$</li>
+                                    <li class="moocoins">10</li>
+                                    <li class="user">Luis Aguilar</li>
+                                    <li class="view">View</li>
+                                </ul>
+                                <div class="cls"></div>
+                            </div>
+                            <div class="cls"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cls"></div>
+{% endblock bodyContent %}
+
+
+{% block headerContent %}
+	<div class="fullwidth">
+        <div class="login" style="margin-left:10px;">
+            {{ user }} / <a href="/salir">Salir</a>
+        </div>
+        <div class="logo">
+            <img src="{{ STATIC_URL }}img/logo.png" id="logoHeader" />
+        </div>
+        <div class="cls"></div>
+	</div>
+{% endblock %}
+

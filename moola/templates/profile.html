@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block headerContent %}
+	<div class="fullwidth">
+        <div class="login">
+            {{ user }} / <a href="/salir">Salir</a>
+        </div>
+        <div class="logo">
+            <img src="{{ STATIC_URL }}img/logo.png" id="logoHeader" />
+        </div>
+        <div class="cls"></div>
+	</div>
+{% endblock %}
+
+{% block bodyContent %}
+	<div class="content">
+            	<h2 class="titulo">Completa tu perfil</h2>
+            	<div class="cls"></div>	
+                <form method="post" class="account" action="/savePerf">
+                    {% csrf_token %}
+                	<div class="columna50">
+                    	<div class="grupo r">
+                            <label for="name">Name: 
+                                <input type="text" name="loginName" id="name" 
+                                {% if userInfo.username %}
+                                    disabled  value="{{userInfo.username}}"
+                                {% endif %}
+                                 /></label>
+                            <label for="email">Email: <input type="text" name="loginEmail" id="email" 
+                                {% if userInfo.email %}
+                                    disabled  value="{{userInfo.email}}"
+                                {% endif %}
+                                /></label>
+                            <label for="addrs">Address: <input type="text" name="loginsAddrs" id="addrs" 
+                                {% if extInfo.Direccion %}
+                                  value="{{extInfo.Direccion}}"
+                                {% endif %}
+                            /></label>
+                            <label for="state">ID: <input type="text" name="identidad" id="identidad" 
+                                {% if extInfo.Identidad %}
+                                  value="{{extInfo.Identidad}}"
+                                {% endif %}
+                                /></label>                                
+
+                            <div class="cls"></div>
+                        </div>
+                    </div>
+                	<div class="columna50">
+                    	<div class="grupo l">
+                            <label for="birthday">Birthday: <input type="text" name="birthday" id="birthday" 
+                                {% if extInfo.Nacimiento %}
+                                  value="{{extInfo.Nacimiento|date:'Y-m-d'}}"
+                                {% endif %}
+                            /></label>
+                            <label for="telephone">Contact #: <input type="text" name="telephone" id="telephone"
+                            {% if extInfo.Telefono %}
+                                  value="{{extInfo.Telefono}}"
+                            {% endif %}
+                            /></label>
+                            <label for="city">City: <input type="text" name="city" id="city" 
+                            {% if extInfo.Ciudad %}
+                                  value="{{extInfo.Ciudad}}"
+                            {% endif %}
+                            /></label>
+                            <label for="country">Country: <input type="text" name="country" id="country" 
+                            {% if extInfo.Pais %}
+                                  value="{{extInfo.Pais}}"
+                            {% endif %}
+                            /></label>
+                            <div class="cls"></div>
+						</div>
+                        <input class="salvar" type="submit" value="Salvar">
+                    </div>
+                </form>
+                <div class="cls"></div>
+                <div class="beneficiarios">
+                	<div class="columna50">
+                    	<div class="payee">
+                        	<form id="addPayee">
+                                {% csrf_token %}
+                                <p>Add Payee</p>
+                                <div class="columna50 l">
+                                    <input type="text" name="name" id="name" placeholder="Name" required />
+                                    <input type="text" name="email" id="email" placeholder="Email" />
+                                </div>
+                                <div class="columna50 r">
+                                    <input type="text" name="contact" id="contact" placeholder="Contact #" />
+                                    <input type="text" name="id" id="id" placeholder="Indentidad" required />
+                                </div>
+                                <div class="cls"></div>
+                                <input type="submit" value="Add" id="btnAdd" />
+                            </form>
+                        </div>
+                    </div>
+                	<div class="columna50">
+                    	<div class="lista">
+                        	<h2 class="tituloBen">Beneficiaries</h2>
+                            <ul>
+                                {% for bene in beneficiarios %}
+                            	   <li id='remi_01' data-id="01">{{bene.Usuario.username}}<span class="del">delete</span></li>
+                            	{% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cls"></div>	
+{% endblock bodyContent %}

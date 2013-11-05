@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block headerContent %}
+	<div class="fullwidth">
+        <div class="login">
+            <form method="POST" class="frmLogin" action="/login">
+                {% csrf_token %}
+                {% if logMsj %}
+                    <h3>{{ logMsj }}</h3>
+                {% endif %}
+                <label for="user">Login: <input type="text" name="userLogin" id="user" /></label>
+                <label for="passw">Passw: <input type="password" name="passwLogin" id="passw" /></label>
+            	<input type="submit" value="Access" />
+            </form>
+        </div>
+        <div class="logo">
+            <img src="{{ STATIC_URL }}img/logo.png" id="logoHeader" />
+        </div>
+        <div class="cls"></div>
+	</div>
+{% endblock %}
+
+{% block bodyContent %}
+<div class="home">
+	<div class="columna50">
+		<div class="registro">
+			<h2>Registrate</h2>
+			<h4>Be part of a changing world</h4>
+            <div class="cls"></div>
+            <form class="frmRegitrar" method="post" action="/registro">
+                {% csrf_token %}
+                {% if regMsj %}
+                    <h3>{{ regMsj }}</h3>
+                {% endif %}
+				<div class="campo name">
+                	<p class="label" data-minw="55" data-maxw="425">Name:</p>
+                    <input type="text" name="loginName" id="name" autocomplete="off" />
+				</div>
+				<div class="campo email">
+                	<p class="label" data-minw="55" data-maxw="425">Email:</p>
+                    <input type="text" name="loginEmail" id="email" autocomplete="off" />
+				</div>
+				<div class="campo passw">
+                	<p class="label" data-minw="80" data-maxw="425">Password:</p>
+                    <input type="password" name="loginPassw" id="passw" autocomplete="off" />
+				</div>
+				<div class="campo type">
+                    <label class="active"><input checked type="radio" class="radio" name="type" value="client" id="client" />Client</label>
+                    <label><input type="radio" class="radio" name="type" value="business" id="business" />Business</label>
+                    <div class="cls"></div>
+				</div>
+                <div class="cls"></div>
+                <input type="submit" value="Register" />
+                <div class="cls"></div>
+                <p class="creditos">By clicking Sign Up, you agree to our Terms and<br/>that you have read our Data Use Policy, including our Cookie Use.</p>
+            </form>
+		</div>
+	</div>
+	<div class="columna50">
+		<div class="comousar">
+        	<div class="titulo">
+                <h1>Un Mundo</h1>
+                <span class="rojo">Completamente</span><span class="naranja">Nuevo</span>
+            </div>
+            <div class="video">
+            	<img src="{{ STATIC_URL }}img/video.jpg" class="video_img" />
+            </div>
+            <p class="span">Cambia la vida de los que amas <strong>sin esfuerzo</strong></p>
+        </div>
+    </div>
+    <div class="cls"></div>
+</div>
+            <div class="descripcion">
+				<div class="columna50 features blue">
+                	
+                </div>
+				<div class="columna50 features green">
+                </div>
+            </div>
+            <div class="cls"></div>
+{% endblock bodyContent %}
+
+{% block footerContent %}
+	<h1>hooters</h1>
+{% endblock footerContent %}
